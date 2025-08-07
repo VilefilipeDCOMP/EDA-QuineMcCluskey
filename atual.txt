@@ -1,0 +1,9 @@
+./benchmark/tests/ex02_funcao4var.pla
+B
+(v0) ! (v1);
+
+ex03_funcao5var.pla
+~A~BC
+(v0&!v1&v2) ! (!v0& v1 & !v2)  ! (!v0 & !v1 & v2)  ! (v0 & v1 & v2)
+
+5/7 71%
