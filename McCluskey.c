@@ -131,7 +131,6 @@ void escolhaCobertura (tipoLista *lista) {
                         if (aux->cobertura[m] == aux2->cobertura[n]) {
                             achou = 1;
                         }
-                        // printf("%d %d %d\n", aux->cobertura[m], aux2->cobertura[n], achou);
                     }
                 }
                 aux2 = aux2->prox;
@@ -142,15 +141,12 @@ void escolhaCobertura (tipoLista *lista) {
                 print = 1;
 
                 for (int i = 0; i < aux->coberturaQtd; i++) {
-                    // printf("%i ", aux->cobertura[i]);
                     for (int j=0; j < globalArrayQtd; j++) {
                         if (aux->cobertura[i] == globalArray[j]) {
                             globalArray[j] = -1;
                         }
                     }
                 }
-                // printf("}");
-                // printf("\n", aux->binario);
                
             }
         }
@@ -182,53 +178,8 @@ void escolhaCobertura (tipoLista *lista) {
             break;
         }
 
-        // while (aux != NULL) {
-        //     for (int j=0; j < aux->coberturaQtd; j++) {
-        //         if (globalArray[i] == aux->cobertura[j]) {
-        //             if (globalArray[i + 1] != aux->cobertura[j + 1]) {
-        //                 achou = 1;
-        //             }
-        //         } else {
-        //             valorFalta = aux->cobertura[j];
-        //         }
-        //         printf("%d %d %d\n", globalArray[i], aux->cobertura[j], achou);
-        //     }
-        //     aux = aux->prox;
-        // }
-        // if (achou == 0) {
-        //     printf("Valor: %d\n", valorFalta);
-        // }
     }
 }
-
-// void escolhaCobertura (tipoLista *lista) {
-//     tipoNo *aux = lista->inicio;
-//     int novoArray[32]; 
-//     int contadorNOVOARRAY;
-//     for (int i = 0; i < lista->qtd; i++) {
-//         tipoNo* aux2 = lista->inicio;
-//         int achou = 0;
-//         for (int m = 0; m < aux->coberturaQtd; m++)
-//             for (int j = 0; j < lista->qtd; j++) {
-//             {
-//                 for (int n = 0; n < aux2->coberturaQtd; n++)
-//                 {   
-//                     if (aux->cobertura != aux2->cobertura) {
-//                         if (aux->cobertura[n] == aux2->cobertura[m]) {
-//                             achou = 1;
-//                         }
-//                         printf("%d %d %d\n", aux->cobertura[m], aux2->cobertura[n], achou);
-//                     }
-//                 }
-//             }
-//             aux2 = aux2->prox;
-//         }
-//         if (achou == 1) {
-//             printf("%s\n", aux->binario);
-//         }
-//         aux = aux->prox;
-//     }
-// }
 
 int mergeArray(int *cobertura1, int *cobertura2, int size1, int size2, int *soma) {
     int k = 0;
@@ -268,31 +219,11 @@ int algoritmoComparar (tipoLista *lista, tipoLista *complexodemais) {
                     
                     mergeArray(aux->cobertura, aux2->cobertura, aux->coberturaQtd, aux2->coberturaQtd, somaArray);
 
-                    // Print the merged array
-                    // printf("Cobertura: ");
-                    // printf("{ ");
-                    // for (int i = 0; i < (aux->coberturaQtd + aux2->coberturaQtd); i++) {
-                    //     printf("%d ", somaArray[i]);
-                    // }
-                    // printf("}");
-                    // printf("\n");
-
                     mergeArray(globalArray, somaArray, globalArrayQtd, (aux->coberturaQtd + aux2->coberturaQtd), globalArray);
                     globalArrayQtd = globalArrayQtd + 2;
 
-                    // Print the merged array
-                    // printf("Cobertura GERAL: ");
-                    // printf("{ ");
-                    // for (int i = 0; i < globalArrayQtd; i++) {
-                    //     printf("%d ", globalArray[i]);
-                    // }
-                    // printf("}");
-                    // printf("\n");
-
-
                     adicionarLista(complexodemais,resultado, resultadoComparador, somaArray, (aux->coberturaQtd + aux2->coberturaQtd));
                     pfvfunciona =1;
-                    // printf("%s %s %s %i %i\n", aux->binario, aux2->binario, resultado, resultadoComparador);
                 }
             }
             aux2 = aux2->prox;
@@ -306,7 +237,7 @@ int algoritmoComparar (tipoLista *lista, tipoLista *complexodemais) {
 
 int main (){
     // "./benchmark/tests/ex00_f_da_folha.pla";
-    char nome_arquivo[] = "./benchmark/tests/ex04_funcao6var.pla"; // Tem que colocar caso ele n encontre para ler o arquivo
+    char nome_arquivo[] = "./benchmark/tests/ex00_f_da_folha.pla"; // Tem que colocar caso ele n encontre para ler o arquivo
     // char nome_arquivo[256];
     // printf("Insira o nome do arquivo (com a extensao .pla no fim): \n");
     // fgets(nome_arquivo,sizeof(nome_arquivo),stdin);
@@ -347,6 +278,12 @@ int main (){
         
     }
     
+    // printf("Os mintermos %i:\n", listamin.qtd);
+    // tipoNo *aux = listamin.inicio;
+    // for (int j=0; j < listamin.qtd; j++) {
+    //     printf("%s %i\n", aux->binario, aux->numeros1);
+    //     aux = aux->prox;
+    // }
     ordenarNum1(&listamin);
 
     int ciclo = 1;
@@ -355,6 +292,12 @@ int main (){
         inicializa(&nova);
 
         int foi = algoritmoComparar(&listamin, &nova);
+        // printf("Os mintermos %i:\n", listamin.qtd);
+        // aux = listamin.inicio;
+        // for (int j=0; j < listamin.qtd; j++) {
+        //     printf("%s %i\n", aux->binario, aux->numeros1);
+        //     aux = aux->prox;
+        // }
 
         if(!foi){
             break;
@@ -366,17 +309,7 @@ int main (){
         ordenarNum1(&listamin);
         ciclo++;
     }
-    
-    // printf("Os mintermos %i:\n", listamin.qtd);
-    // tipoNo *aux = listamin.inicio;
-    // for (int j=0; j < listamin.qtd; j++) {
-    //     printf("%s %i\n", aux->binario, aux->numeros1);
-    //     aux = aux->prox;
-    // }
-
     escolhaCobertura(&listamin);
-
-    // 10-1 110- -011 1-11 -> 11-- 
 
     fclose(file);
     return 0; 
